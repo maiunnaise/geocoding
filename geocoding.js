@@ -1,6 +1,8 @@
 let btn = document.querySelector('button');
 let div = document.querySelector('div');
-let HighAcc = document.querySelector('input[name="HighAcc"]');
+let highAcc = document.querySelector('input[name="HighAcc"]');
+let maxAge = document.querySelector('input[name="maxAge"]');
+let timeout = document.querySelector('input[name="timeout"]');
 
 const succès = (pos) => {
     console.log(pos);
@@ -18,11 +20,17 @@ const erreur = (err) => {
 }
 
 btn.addEventListener('click', () => {
-    let options= {};
+    let options= {maximunAge: 30000, timeout: 27000};
 
-    if (HighAcc.checked) {
+    if (highAcc.checked) {
         options.enableHighAccuracy = true;
     }
+    else{
+        options.enableHighAccuracy = false;
+    }
+    options.maximunAge = maxAge.value;
+    options.timeout = timeout.value;
+    
     navigator.geolocation.getCurrentPosition(succès, erreur, options);
     console.log(options);
 });
