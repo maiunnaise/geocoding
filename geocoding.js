@@ -1,5 +1,6 @@
 let btn = document.querySelector('button');
 let div = document.querySelector('div');
+let HighAcc = document.querySelector('input[name="HighAcc"]');
 
 const succès = (pos) => {
     console.log(pos);
@@ -17,7 +18,13 @@ const erreur = (err) => {
 }
 
 btn.addEventListener('click', () => {
-    navigator.geolocation.getCurrentPosition(succès, erreur);
+    let options= {};
+
+    if (HighAcc.checked) {
+        options.enableHighAccuracy = true;
+    }
+    navigator.geolocation.getCurrentPosition(succès, erreur, options);
+    console.log(options);
 });
 
 
