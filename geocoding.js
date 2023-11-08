@@ -26,7 +26,7 @@ const succès = (pos) => {
     <br> Altitude : ${pos.coords.altitude}
     <br> Précision altitude : ${pos.coords.altitudeAccuracy}
     <br> Direction (deg) : ${pos.coords.heading}
-    <br> Vitesse (m/s) : ${speed}`;
+    <br> Vitesse (m/s) : ${speed * 1000}`; 
 }
 const erreur = (err) => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
