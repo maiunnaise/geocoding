@@ -8,6 +8,7 @@ let stopPos = document.querySelector('button:nth-of-type(3)');
 
 let options={};
 let id;
+let previousPos
 
 const succès = (pos) => {
     console.log(pos);
@@ -25,22 +26,15 @@ const erreur = (err) => {
 }
 
 getPos.addEventListener('click', () => {
-
-    if (highAcc.checked) {
-        options.enableHighAccuracy = true;
-    }
-    else{
-        options.enableHighAccuracy = false;
-    }
-    options.maximunAge = maxAge.value;
-    options.timeout = timeout.value;
-
+    defOptions();
     navigator.geolocation.getCurrentPosition(succès, erreur, options);
+    console.log(options);
 });
 
 
 watchPos.addEventListener('click', () => {
     stopPos.disabled = false;
+    defOptions();
     id = navigator.geolocation.watchPosition(succès, erreur, options);
 });
 
@@ -50,6 +44,15 @@ stopPos.addEventListener('click', () => {
     stopPos.disabled = true;
 });
 
-
+function defOptions(){
+    if (highAcc.checked) {
+        options.enableHighAccuracy = true;
+    }
+    else{
+        options.enableHighAccuracy = false;
+    }
+    options.timeout = timeout.value;
+    options.maximumAge = maxAge.value;
+}
 
    
