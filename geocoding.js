@@ -1,8 +1,13 @@
-let btn = document.querySelector('button');
+let getPos = document.querySelector('button');
 let div = document.querySelector('div');
 let highAcc = document.querySelector('input[name="HighAcc"]');
 let maxAge = document.querySelector('input[name="maxAge"]');
 let timeout = document.querySelector('input[name="timeout"]');
+let watchPos = document.querySelector('button:nth-of-type(2)');
+let stopPos = document.querySelector('button:nth-of-type(3)');
+
+let options={};
+let id;
 
 const succès = (pos) => {
     console.log(pos);
@@ -19,8 +24,7 @@ const erreur = (err) => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-btn.addEventListener('click', () => {
-    let options= {maximunAge: 30000, timeout: 27000};
+getPos.addEventListener('click', () => {
 
     if (highAcc.checked) {
         options.enableHighAccuracy = true;
@@ -30,9 +34,20 @@ btn.addEventListener('click', () => {
     }
     options.maximunAge = maxAge.value;
     options.timeout = timeout.value;
-    
+
     navigator.geolocation.getCurrentPosition(succès, erreur, options);
     console.log(options);
+});
+
+
+watchPos.addEventListener('click', () => {
+    stopPos.disabled = false;
+    id = navigator.geolocation.watchPosition(succès, erreur, options);
+});
+
+stopPos.addEventListener('click', () => {
+    navigator.geolocation.clearWatch(id);
+    stopPos.disabled = true;
 });
 
 
