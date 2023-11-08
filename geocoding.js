@@ -36,7 +36,6 @@ getPos.addEventListener('click', () => {
     options.timeout = timeout.value;
 
     navigator.geolocation.getCurrentPosition(succès, erreur, options);
-    console.log(options);
 });
 
 
@@ -47,6 +46,7 @@ watchPos.addEventListener('click', () => {
 
 stopPos.addEventListener('click', () => {
     navigator.geolocation.clearWatch(id);
+    div.innerHTML = "";
     stopPos.disabled = true;
 });
 
