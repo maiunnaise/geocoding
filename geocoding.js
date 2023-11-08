@@ -14,7 +14,7 @@ const succès = (pos) => {
     console.log(pos);
     let speed = 0;
     if (previousPos) {
-        const distance = getDistanceFromLatLonInKm(previousPos.coords.latitude, previousPos.coords.longitude, pos.coords.latitude, pos.coords.longitude);
+        const distance = getDistanceFromLatLonInKm(previousPos.coords.latitude, previousPos.coords.longitude, pos.coords.latitude, pos.coords.longitude) * 1000; // convert to meters
         const timeDiff = (pos.timestamp - previousPos.timestamp) / 1000; // convert to seconds
         speed = distance / timeDiff;
     }
@@ -26,7 +26,7 @@ const succès = (pos) => {
     <br> Altitude : ${pos.coords.altitude}
     <br> Précision altitude : ${pos.coords.altitudeAccuracy}
     <br> Direction (deg) : ${pos.coords.heading}
-    <br> Vitesse (m/s) : ${speed * 1000}`; 
+    <br> Vitesse (m/s) : ${speed}`; 
 }
 const erreur = (err) => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
